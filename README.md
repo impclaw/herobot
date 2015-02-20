@@ -10,7 +10,9 @@ To install the bot it requires pyscreenshot, cv2, pytesseract, numpy and pyuseri
 	pip install pyscreenshot pytesseract numpy pyuserinput
 	git clone https://github.com/flandree/herobot.git
 	cd herobot
-	(make sure whole clicker heroes windows is open in a web browser)
+
+Make sure the whole clicker heroes window is open in a web browser, then enter: 
+
 	./herobot.py
 
 Pictures borrowed from reddit user vorksholk. I will update the bot as I progress through and explore the game. Right now it works best for 100-1000HS farming, but with some tweaking it can work for other gameplay styles. 
