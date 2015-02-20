@@ -27,6 +27,7 @@ class Heroes:
 		self.mouse = PyMouse()
 		self.keyboard = PyKeyboard()
 		self.startpointer = cv2.imread('img/start.png')
+		self.progimg = cv2.imread('img/prog.png')
 		self.heroes = []
 		self.loadheroes()
 		self.getwindow()
@@ -57,8 +58,8 @@ class Heroes:
 		self.hwinx = self.winx + 11
 		self.hwiny = self.winy + 171
 
-	def findheroimg(self, small):
-		im = ImageGrab.grab(bbox=(self.hwinx, self.hwiny, self.winx+535, self.winy+635))
+	def findimg(self, small, x, y, w, h):
+		im = ImageGrab.grab(bbox=(x, y, x+w, y+h))
 		big=np.array(im)
 		big=big[:, :, ::-1].copy()
 
@@ -76,6 +77,9 @@ class Heroes:
 			return (x, y)
 		else:
 			return (None, None)
+
+	def findheroimg(self, small):
+		return self.findimg(small, self.hwinx, self.hwiny, 535, 635)
 
 	def findhero(self, hero):
 		x, y = self.findheroimg(hero.img)
@@ -140,8 +144,13 @@ class Heroes:
 		sleep(1.2)
 		self.mouse.click(self.winx+250, self.winy+550)
 
-	def clickprog(self):
-		self.mouse.click(self.winx+1111, self.winy+211)
+	def checkprog(self):
+		x, y = self.findimg(self.progimg, self.winx+1090, self.winy+190, 60, 60)
+		if x == None and y == None:
+			return
+		else:
+			self.mouse.click(self.winx+1111, self.winy+211)
+			sleep(0.2)
 
 	def click(self, times = 1):
 		x, y = self.mouse.position()

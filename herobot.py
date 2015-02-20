@@ -4,13 +4,14 @@ from time import *
 h = Heroes()
 	
 def startup():
-	h.clickprog()
+	h.checkprog()
 	sleep(0.5)
 	h.selmonster()
 	sleep(0.2)
-	for n in range(0, 20):
-		h.click()
-		sleep(0.7)
+	money = 0
+	while money < h.heroes[1].price:
+		h.click(20)
+		money = h.getmoney()
 	sleep(5)
 
 def buyhero(ll):
@@ -43,6 +44,7 @@ def earlygame(start):
 		h.selhero(h.heroes[lvl])
 		h.ctrlclick()
 		sleep(2)
+		h.checkprog()
 		if lvl > 17:
 			h.upgrade()
 			sleep(2)
