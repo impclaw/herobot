@@ -107,7 +107,7 @@ class Heroes:
 			sleep(0.5)
 			x, y = self.findhero(hero)
 		if x == None or y == None:
-			print "Warning: Strange hero error"
+			#print "Warning: Strange hero error"
 			self.selhero(hero)
 			return
 		self.mouse.move(self.hwinx+50, self.hwiny+y+50)
