@@ -117,6 +117,9 @@ class Heroes:
 		self.mouse.move(self.hwinx+50, self.hwiny+y+50)
 		sleep(0.2)
 
+	def resetcursor(self):
+			self.mouse.move(self.hwinx, self.hwiny)
+
 	def grabocr(self, x, y, w, h):
 		im = ImageGrab.grab(bbox=(x, y, x+w, y+h))
 		pix = im.load()
@@ -128,9 +131,18 @@ class Heroes:
 
 	def getmoney(self):
 		raw = self.grabocr(self.winx+100, self.winy+18, 400, 42)
+		raw = raw.replace(' ', '')
 		try:
 			val = float(raw)
 			return val
+		except:
+			return 0
+
+	def getlevel(self):
+		raw = self.grabocr(self.winx+697, self.winy+81, 400, 32)
+		num = ''.join(ch for ch in raw if ch.isdigit())
+		try:
+			return int(num)
 		except:
 			return 0
 

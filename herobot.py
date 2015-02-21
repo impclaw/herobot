@@ -8,7 +8,7 @@ def startup():
 	sleep(0.5)
 	h.selmonster()
 	sleep(0.2)
-	money = 0
+	money = h.getmoney()
 	while money < h.heroes[1].price:
 		h.click(20)
 		money = h.getmoney()
@@ -35,7 +35,7 @@ def earlygame(start):
 	lvl = start
 	money = h.getmoney()
 	while money < h.heroes[h.FROST].price:
-		if money > h.heroes[lvl+1].price:
+		while money > h.heroes[lvl+1].price:
 			lvl += 1
 			if lvl == h.NATALIA+2:
 				buybetty()
@@ -43,21 +43,24 @@ def earlygame(start):
 				buymidas()
 		h.selhero(h.heroes[lvl])
 		h.ctrlclick()
-		sleep(2)
+		sleep(1)
 		h.checkprog()
+		h.resetcursor()
 		if lvl > 17:
 			h.upgrade()
-			sleep(2)
+			sleep(1)
 		money = h.getmoney()
 
 def frostleaf():
-	for n in range(0, 10):
+	money = h.getmoney()
+	while money < 3e30:
 		h.upgrade()
 		sleep(1)
 		h.selhero(h.heroes[h.FROST])
 		sleep(1)
 		h.ctrlclick()
 		sleep(5)
+		money = h.getmoney()
 
 def finalupgrade():
 	for n in range(0, h.FROST):
@@ -73,6 +76,8 @@ def nextgame():
 	sleep(1)
 	h.ctrlclick(2)
 	sleep(0.2)
+	h.resetcursor()
+	sleep(0.2)
 	h.ascend()
 
 count = 0
@@ -84,6 +89,7 @@ while True:
 	earlygame(1)
 	frostleaf()
 	finalupgrade()
+	print "Reached lvl:",h.getlevel()
 	nextgame()
 	end = datetime.now()
 	count += 1
